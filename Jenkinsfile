@@ -2,6 +2,12 @@ node {
     def version
 
     try {
+        stage('test docker image') {
+            checkout scm
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'build']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/iMelnik/confy.git']]])
+            sh 'cd build && ./gradlew publishImage'
+        }
+
         stage('build') {
             checkout scm
             checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'build']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/iMelnik/confy.git']]])
