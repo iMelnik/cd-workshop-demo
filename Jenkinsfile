@@ -14,6 +14,7 @@ node {
         }
 
         stage('integration test') {
+            sh 'curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash'
             sh 'helm init'
             sh 'helm version'
 
