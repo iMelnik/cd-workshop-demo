@@ -4,7 +4,7 @@ node {
     try {
         stage('build') {
             checkout scm
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'build']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nbyl/confy.git']]])
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'build']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/iMelnik/confy.git']]])
             version = sh returnStdout: true, script: 'cd build && ./gradlew -q printVersion'
             sh 'cd build && ./gradlew -Pprod -xtest build'
         }
